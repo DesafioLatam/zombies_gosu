@@ -1,5 +1,7 @@
 require 'gosu'
 require_relative 'zombie'
+require_relative 'zombie_terrestre'
+require_relative 'zombie_volador'
 
 class MyWindow < Gosu::Window
   def initialize
@@ -9,7 +11,11 @@ class MyWindow < Gosu::Window
     File.open("zombies.txt", "r",).readlines.each do |line|
       coords = line.split(",")
       coords.map!(&:to_i)
-      @zombies << Zombie.new(coords[0], coords[1])
+      if coords[2] == 1
+        @zombies << ZombieTerrestre.new(coords[0], coords[1])
+      elsif coords[2] == 2
+        @zombies << ZombieVolador.new(coords[0], coords[1])
+      end
     end
   end
 

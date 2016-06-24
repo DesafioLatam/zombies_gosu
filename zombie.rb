@@ -6,6 +6,7 @@ class Zombie
     @direction = "right"
     @image = Gosu::Image.new("zombie.png")
     @steps = 0
+    @speed = 0
   end
 
   def update
@@ -26,13 +27,13 @@ class Zombie
 
   def walk
     if @direction == "right"
-      @x += 1
+      @x += @speed
     elsif @direction == "left"
-      @x -= 1
+      @x -= @speed
     elsif @direction == "up"
-      @y -= 1
+      @y -= @speed
     elsif @direction == "down"
-      @y += 1
+      @y += @speed
     end
 
     if @steps >= 50
